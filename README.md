@@ -1,4 +1,4 @@
-Quick Dev Note
+Dev Note
 
 Framework : Foundation (Sass)
 Responsive design with media breakpoints screen set from sass
