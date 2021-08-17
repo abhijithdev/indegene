@@ -1,6 +1,7 @@
 Dev Note
 
 Framework : Foundation (Sass)
+
 Responsive design with media breakpoints screen set from sass
 Custom font loaded
 Secondary font loaded as script for better speed (webfontkit loader)
