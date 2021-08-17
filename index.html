@@ -1,0 +1,133 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indegene Test</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+  
+  <div class="grid-container full" id="resultWrapper">
+    <div class="grid-x align-center">
+      <div class="large-9 small-11 medium-11 cell">
+        <div class="bloCkTitle text-center">
+          <h1>Result of the test</h1>
+        </div>
+        <div class="blockIcons grid-x grid-padding-x large-up-5 small-up-2 medium-up-3">
+          <div class="cell">
+            <div class="singleIcon text-center">
+              <img src="img/never.png" alt="">
+              <p>Never</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="singleIcon text-center">
+              <img src="img/occasionally.png" alt="">
+              <p>Occasionally </p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="singleIcon text-center">
+              <img src="img/4-hours.png" alt="">
+              <p>4 hours</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="singleIcon text-center">
+              <img src="img/yearly.png" alt="">
+              <p>Yearly</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="singleIcon text-center">
+              <img src="img/never.png" alt="">
+              <p>Never</p>
+            </div>
+          </div>
+        </div>
+        <div class="draggerWrapper">
+          <div class="rangeBox">
+            <div class="range">
+                <input type="range" min="1" max="3" steps="1" value="1">
+              </div>
+          </div>
+          
+
+            <ul class="range-labels">
+              <li >Less relevant</li>
+              <li>relevant</li>
+              <li>Very relevant</li>
+              
+            </ul>
+        </div>
+        <div class="tryAgainbutton text-center">
+          <a id="tryagain">Try Again <span>&#8250;</span></a>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/what-input/dist/what-input.js"></script>
+    <script src="node_modules/foundation-sites/dist/js/foundation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ['Roboto:400,500']
+        }
+      });
+    </script>
+    <script>
+      var sheet = document.createElement('style'),  
+        $rangeInput = $('.range input'),
+        prefs = ['webkit-slider-runnable-track', 'moz-range-track', 'ms-track'];
+
+      document.body.appendChild(sheet);
+
+      var getTrackStyle = function (el) {  
+        var curVal = el.value,
+            val = (curVal - 1) * 50,
+            style = '';
+        
+        // Set active label
+        $('.range-labels li').removeClass('active selected');
+        
+        var curLabel = $('.range-labels').find('li:nth-child(' + curVal + ')');
+        
+        curLabel.addClass('active selected');
+        curLabel.prevAll().addClass('selected');
+        
+        // Change background gradient
+        for (var i = 0; i < prefs.length; i++) {
+          style += '.range {background: linear-gradient(to right, #cc0000 0%, #cc0000 ' + val + '%, #fff ' + val + '%, #fff 100%)}';
+          style += '.range input::-' + prefs[i] + '{background: linear-gradient(to right, #cc0000 0%, #cc0000 ' + val + '%, #cc0000 ' + val + '%, #cc0000 100%)}';
+        }
+
+        return style;
+      }
+
+      $rangeInput.on('input', function () {
+        sheet.textContent = getTrackStyle(this);
+      });
+
+      // Change input value on label click
+      $('.range-labels li').on('click', function () {
+        var index = $(this).index();
+        
+        $rangeInput.val(index + 1).trigger('input');
+        
+      });
+      // reset the range
+      $('#tryagain').on('click', function () {
+        var index = $(this).index();
+        
+        $rangeInput.val(1).trigger('input');
+        
+      });
+    </script>
+  </body>
+</html>
